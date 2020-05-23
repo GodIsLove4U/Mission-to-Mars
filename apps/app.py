@@ -1,8 +1,7 @@
 from flask import Flask, render_template
 from flask_pymongo import PyMongo
-import scraping
-import pandas as pd
-import sys, traceback
+import challenge
+#import scraping
 
 app = Flask(__name__)
 
@@ -10,7 +9,7 @@ app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/mars_app"
 mongo = PyMongo(app)
 
-# Visit htlm and look at home page
+# Visit html and look at home page
 @app.route("/")
 def index():
    mars = mongo.db.mars.find_one()
@@ -19,11 +18,11 @@ def index():
 @app.route("/scrape")
 def scrape():
    mars = mongo.db.mars
-   mars_data = scraping.scrape_all()
+   #mars_data = scraping.scrape_all()
+   mars_data = challenge.scrape_all()
+   print(mars_data)
    mars.update({}, mars_data, upsert=True)
    return "Scraping Successful!"  
 
 if __name__ == "__main__":
    app.run()
-
-   

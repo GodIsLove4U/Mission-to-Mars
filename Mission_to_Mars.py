@@ -13,7 +13,7 @@ import pandas as pd
 
 
 # Windows users
-executable_path = {'executable_path': 'chromedriver.exe'}
+executable_path = {'executable_path':r'C:\Users\dcohen\Documents\UCBE\Mission-to-Mars\chromedriver.exe'}
 browser = Browser('chrome', **executable_path, headless=False)
 
 
@@ -101,9 +101,14 @@ img_soup = BeautifulSoup(html, 'html.parser')
 
 
 # Find the relative image url
+#img_url_rel = img_soup.select_one('figure.lede a img').get("src")
+#img_url_rel
+#try:
+   # find the relative image url
 img_url_rel = img_soup.select_one('figure.lede a img').get("src")
-img_url_rel
 
+#except AttributeError:
+    #return None
 
 # In[14]:
 
